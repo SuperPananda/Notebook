@@ -2,4 +2,6 @@ Notebook/node_modules/
 Notebook/Scripts/dist/
 Notebook/bin/
 Notebook/obj/
+Notebook/Migrations
+Notebook/App_Data/*
 .vs/

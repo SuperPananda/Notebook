@@ -1,4 +1,5 @@
-﻿using System;
+using Notebook.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ namespace Notebook.Controllers
 {
     public class HomeController : Controller
     {
+        NotebookDbContext db = new NotebookDbContext();
         // GET: Home
         public ActionResult Index()
         {
