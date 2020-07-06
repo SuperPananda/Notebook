@@ -64,14 +64,7 @@ namespace Notebook.Controllers
         {
             if (ModelState.IsValid)
             {
-                var originalModel = db.Notes.Single(x =>
-                  x.Id == note.Id
-                );
-                originalModel.FirstName = note.FirstName;
-                originalModel.LastName = note.LastName;
-                originalModel.Phone = note.Phone;
-                originalModel.Email = note.Email;
-                db.Entry(originalModel).State = EntityState.Modified;
+                db.Entry(note).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return new HttpStatusCodeResult(200);
             }

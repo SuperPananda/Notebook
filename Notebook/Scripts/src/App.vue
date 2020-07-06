@@ -1,20 +1,20 @@
 <template>
   <div id="app">
     <ToolBar />
-    <Table />
+    <Cards />
   </div>
 </template>
 
 <script>
 //Подключаем компоненты
 import ToolBar from './components/ToolBar'
-import Table from './components/Table'
+import Cards from './components/Cards'
 
 export default {
   name: 'app',
   components:{
     ToolBar,
-    Table
+    Cards
   }
 }
 </script>

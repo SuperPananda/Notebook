@@ -11,15 +11,15 @@
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form @submit="formSubmit">
                 <strong>Name:</strong>
-                <input id="name" type="text" class="form-control" />
+                <input id="name" type="text" class="form-control" v-model="formModal.FirstName" />
                 <strong>Last Name:</strong>
-                <input id="name" class="form-control" />
+                <input id="name" class="form-control" v-model="formModal.LastName" />
                 <strong>Phone:</strong>
-                <input class="form-control" />
+                <input class="form-control" v-model="formModal.Phone" />
                 <strong>Email:</strong>
-                <input id="email" class="form-control" />
+                <input id="email" class="form-control" v-model="formModal.Email" />
                 <br />
                 <button class="btn btn-success">Submit</button>
               </form>
@@ -34,17 +34,41 @@
 <script>
 export default {
   name: "Modal",
-  props: ["show"],
+  props: ["show", "form", "edit"],
   data() {
     return {
-      showModal: this.show
+      showModal: this.show,
+      formModal: this.form,
+      editModal: this.edit
     };
   },
-  methods:{
-      closeModal(){
-          this.showModal = false;
-          this.$emit('close', this.showModal);
+  methods: {
+    closeModal() {
+      this.showModal = false;
+      this.$emit("close", this.showModal);
+    },
+    formSubmit(e) {
+      e.preventDefault();
+      //console.log(this.form);
+      const formData = new FormData();
+      formData.append("FirstName", this.form.FirstName);
+      formData.append("Phone", this.form.Phone);
+      formData.append("Email", this.form.Email);
+      formData.append("LastName", this.form.LastName);
+      this.showModal = false;
+      this.$emit("close", this.showModal);
+      if (this.editModal)
+      {
+          formData.append("Id", this.form.Id);
+          this.$emit("formsubmit", {
+              Id: this.form.Id,
+              value: formData
+              })
       }
+      else{
+          this.$emit("formsubmit", formData); 
+      }
+    }
   }
 };
 </script>

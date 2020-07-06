@@ -8,17 +8,25 @@
         </b-nav-item>
       </b-navbar-nav>
     </b-navbar>
-    <Modal v-if="show" :show="show" v-on:close="close"/>
+    <Modal v-if="show" :edit="edit" :show="show" :form="note" v-on:formsubmit="AddNote" v-on:close="close"/>
   </div>
 </template>
 
 <script>
-import Modal from './Modal'
+import axios from 'axios';
+import Modal from './Modal';
 export default {
   name: "ToolBar",
   data() {
     return {
-      show: false
+      show: false,
+      edit: false,
+      note: {
+          FirstName: null,
+          LastName: null,
+          Phone: null,
+          Email: null
+      }
     };
   },
   components:{
@@ -27,6 +35,10 @@ export default {
   methods:{
       close(value){
           this.show = value
+      },
+      AddNote(value){
+          axios.post("Notes/Create", value)
+          .catch(error => console.log(error));
       }
   }
 };
